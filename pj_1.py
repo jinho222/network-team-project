@@ -6,6 +6,8 @@ import socket
 
 
 class NetworkSocket:
+    BUFFER_SIZE = 1024
+
     def __init__(self) -> None:
         self.tcp_socket = None
         self.udp_socket = None
@@ -45,7 +47,7 @@ class NetworkSocket:
     @staticmethod
     def udp_server_connect(udp_server_socket: socket.socket):
         # udp_client_socket 함수가 전송한 packet으로부터 client의 udp address(udp_client_addr) 반환
-        _, addr = udp_server_socket.recvfrom(1024)
+        _, addr = udp_server_socket.recvfrom(NetworkSocket.BUFFER_SIZE)
         return addr
 
     @staticmethod
@@ -66,11 +68,12 @@ class NetworkSocket:
 
     def tcp_recv(self) -> bytes:
         # TCP socket(tcp_socket)으로 들어오는 packet의 data 반환
-        return self.tcp_socket.recv(1024)
+        return self.tcp_socket.recv(NetworkSocket.BUFFER_SIZE)
 
     def udp_recv(self) -> bytes:
         # UDP socket(udp_socket)으로 들어오는 packet의 data 반환
-        return self.udp_socket.recvfrom(1024)
+        msg, _ = self.udp_socket.recvfrom(NetworkSocket.BUFFER_SIZE)
+        return msg
 
     def close(self) -> None:
         try:
