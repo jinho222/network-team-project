@@ -8,5 +8,5 @@ __pycache__
 downloads/*
 !downloads/.gitkeep
 
-files
+files/*
 !files/.gitkeep
