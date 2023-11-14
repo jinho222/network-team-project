@@ -7,3 +7,6 @@ __pycache__
 
 downloads/*
 !downloads/.gitkeep
+
+files
+!files/.gitkeep
