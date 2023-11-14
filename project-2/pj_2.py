@@ -144,7 +144,7 @@ class FileTransfer:
         if packet_type == PACKET_TYPE_FILE_START:
             basename = data.decode(ENCODING)
             self.file_name = basename
-            file_path = './downloads/(tcp) '+basename
+            file_path = './downloads/(tcp) '+ basename
             # 파일의 이름을 받아 file_path 위치에 self.file_pointer를 생성한다.
             self.file_pointer = open(file_path, 'wb')
             return 0
@@ -246,7 +246,7 @@ class FileTransfer:
 
             basename = data.decode(ENCODING)            
             self.file_name = basename
-            file_path = './downloads/(udp) '+basename
+            file_path = './downloads/(udp) ' + basename
             # 파일의 이름을 받아 file_path 위치에 self.file_pointer를 생성하고.
             # 그다음 받을 파일의 data의 시작 packet의 ack_num를 self.file_packet_start에 저장하여
             # 연속된 packet을 받을 수 있게 준비한다.
