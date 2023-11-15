@@ -68,11 +68,11 @@ class NetworkSocket:
 
     def tcp_recv(self) -> bytes:
         # TCP socket(tcp_socket)으로 들어오는 packet의 data 반환
-        return self.tcp_socket.recv(NetworkSocket.BUFFER_SIZE)
+        return self.tcp_socket.recv(APP_HEADER_LEN + PACKET_SIZE)
 
     def udp_recv(self) -> bytes:
         # UDP socket(udp_socket)으로 들어오는 packet의 data 반환
-        msg, _ = self.udp_socket.recvfrom(NetworkSocket.BUFFER_SIZE)
+        msg, _ = self.udp_socket.recvfrom(APP_HEADER_LEN + PACKET_SIZE)
         return msg
 
     def close(self) -> None:
