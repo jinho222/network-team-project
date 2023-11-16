@@ -1,4 +1,3 @@
-
 import os
 from threading import TIMEOUT_MAX
 from tkinter.messagebox import NO
@@ -304,13 +303,16 @@ class FileTransfer:
         # def udp_gbn () or def udp_sr()로 구현
          # hint: self.udp_send_packet[ack_num]에 저장시
         # (send time, packet)형태로 저장할 것
-        ack_num = self.udp_ack_num
-        while ack_num != self.udp_last_ack_num:
-            if not self.udp_ack_windows[ack_num] and not self.udp_recv_flag[ack_num]:
-                packet = self.udp_send_packet[ack_num][1]
-                udp_send_func(packet)
-                self.udp_send_packet[ack_num] = (time(), packet)
-            ack_num = (ack_num + 1) % UDP_MAX_ACK_NUM
+        def udp_sr():
+            ack_num = self.udp_ack_num
+            while ack_num != self.udp_last_ack_num:
+                if not self.udp_ack_windows[ack_num] and not self.udp_recv_flag[ack_num]:
+                    packet = self.udp_send_packet[ack_num][1]
+                    udp_send_func(packet)
+                    self.udp_send_packet[ack_num] = (time(), packet)
+                ack_num = (ack_num + 1) % UDP_MAX_ACK_NUM
+
+        udp_sr()
         pass
 
     def udp_ack_send(self, ack_bytes: bytes, udp_send_func: Callable):
